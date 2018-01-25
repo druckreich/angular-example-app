@@ -1,10 +1,11 @@
-import {Component} from '@angular/core';
-import {AppState} from "./app.state";
+import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {InitApp} from "./app.actions";
 import {Observable} from "rxjs/Observable";
 import './rxjs-imports';
-import {BookState} from "./store/book/book.reducer";
+import {getAllBooks, getBookSelector} from "./store/reducers";
+import {Book} from "./store/book/book.model";
+import {selectAll} from './store/reducers';
 
 
 @Component({
@@ -12,11 +13,12 @@ import {BookState} from "./store/book/book.reducer";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  bookState$: Observable<BookState> = this.store.select(s => s.bookState);
+  books$: Observable<Book[]> = this.store.select(getBookSelector.selectAll);
 
-  constructor(private store: Store<AppState>) {
+
+  constructor(private store: Store<any>) {
 
   }
 

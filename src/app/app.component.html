@@ -4,4 +4,9 @@
   <!--</li>-->
 <!--</ul>-->
 
-<pre>{{ bookState$ | async | json}}</pre>
+<div class="list-group">
+  <div class="list-group-item" *ngFor="let book of books$ | async">
+    <b>{{book.title}}</b> ({{book.pages}} pages)
+    <div class="text-muted"><small>Author: {{book.author}}</small></div>
+  </div>
+</div>

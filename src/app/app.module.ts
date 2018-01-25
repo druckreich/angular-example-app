@@ -2,9 +2,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {StoreModule} from '@ngrx/store';
 import {AppComponent} from './app.component';
-import {bookReducer} from "./store/book/book.reducer";
+import {metaReducers, reducers} from "./store/reducers";
 import {EffectsModule} from '@ngrx/effects';
-import {BookEffects} from "./store/book/book.effects";
 import {BookService} from "./store/book/book.service";
 import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
@@ -19,12 +18,9 @@ import {AppEffects} from "./app.effects";
     CommonModule,
     BrowserModule,
     HttpClientModule,
-    StoreModule.forRoot({
-      books: bookReducer
-    }),
+    StoreModule.forRoot(reducers, {metaReducers}),
     EffectsModule.forRoot([
-      AppEffects,
-      BookEffects
+      AppEffects
     ])
 
   ],

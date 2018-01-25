@@ -1,5 +1,3 @@
-import {EntityState} from '@ngrx/entity';
-
 export interface Book {
   id: number,
   author: string,
