@@ -1,4 +1,11 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {AppState} from "./app.state";
+import {Store} from '@ngrx/store';
+import {InitApp} from "./app.actions";
+import {Observable} from "rxjs/Observable";
+import './rxjs-imports';
+import {BookState} from "./store/book/book.reducer";
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +13,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+
+  bookState$: Observable<BookState> = this.store.select(s => s.bookState);
+
+  constructor(private store: Store<AppState>) {
+
+  }
+
+  ngOnInit() {
+    this.store.dispatch(new InitApp());
+  }
+
 }
