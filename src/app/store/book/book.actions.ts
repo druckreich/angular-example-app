@@ -11,7 +11,7 @@ export enum BookActionTypes {
   DELETE_BOOK = '[Book] Delete Book',
   DELETE_BOOKS = '[Book] Delete Books',
   CLEAR_BOOKS = '[Book] Clear Books',
-  SEARCH_BOOKS = '[Book] Search Books'
+  SEARCH_BOOKS = '[Book] Search Books',
 }
 
 export class LoadBooks implements Action {
@@ -52,14 +52,14 @@ export class UpdateBooks implements Action {
 export class DeleteBook implements Action {
   readonly type = BookActionTypes.DELETE_BOOK;
 
-  constructor(public payload: { id: string }) {
+  constructor(public payload: { id: number }) {
   }
 }
 
 export class DeleteBooks implements Action {
   readonly type = BookActionTypes.DELETE_BOOKS;
 
-  constructor(public payload: { ids: string[] }) {
+  constructor(public payload: { ids: number[] }) {
   }
 }
 
@@ -67,7 +67,7 @@ export class ClearBooks implements Action {
   readonly type = BookActionTypes.CLEAR_BOOKS;
 }
 
-export class SearchBooks implements Action {
+export class SearchBook implements Action {
   readonly type = BookActionTypes.SEARCH_BOOKS;
 
   constructor(public payload: string) {
@@ -83,4 +83,5 @@ export type BookActions =
   | DeleteBook
   | DeleteBooks
   | ClearBooks
-  | SearchBooks;
+  | SearchBook;
+

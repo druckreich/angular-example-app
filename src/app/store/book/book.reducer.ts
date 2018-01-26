@@ -12,7 +12,7 @@ export const adapter: EntityAdapter<Book> = createEntityAdapter<Book>();
 
 const initialState: State = adapter.getInitialState({
   selectedBook: null,
-  searchBook: '',
+  searchBook: ''
 });
 
 export function bookReducer(state: State = initialState, action: BookActions): State {
@@ -71,6 +71,7 @@ export const {
 
 export const searchBook = (state: State) => state.searchBook;
 export const selectedBook = (state: State) => state.selectedBook;
+
 
 
 
