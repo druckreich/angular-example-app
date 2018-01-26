@@ -1,4 +1,6 @@
-import {Book} from "./book.model";
+
+
+import {Book} from "./book/book.model";
 
 export const books: Book[] = [
   {

@@ -7,7 +7,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {BookService} from "./store/book/book.service";
 import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
-import {AppEffects} from "./app.effects";
+import {AppEffects} from "./store/effects";
 
 
 @NgModule({

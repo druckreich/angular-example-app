@@ -1,49 +1,59 @@
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
-import {Book} from "./book.model";
-import {BookActions, BookActionTypes} from "./book.actions";
+import {Book} from './book.model';
+import {BookActions, BookActionTypes} from './book.actions';
+
 
 export interface State extends EntityState<Book> {
   selectedBook: Book;
+  searchBook: string;
 }
 
-export const bookAdapter: EntityAdapter<Book> = createEntityAdapter<Book>();
+export const adapter: EntityAdapter<Book> = createEntityAdapter<Book>();
 
-const initialState: State = bookAdapter.getInitialState({
-  selectedBook: null
+const initialState: State = adapter.getInitialState({
+  selectedBook: null,
+  searchBook: '',
 });
 
 export function bookReducer(state: State = initialState, action: BookActions): State {
   switch (action.type) {
     case BookActionTypes.ADD_BOOK: {
-      return bookAdapter.addOne(action.payload.book, state);
+      return adapter.addOne(action.payload.book, state);
     }
 
     case BookActionTypes.ADD_BOOKS: {
-      return bookAdapter.addMany(action.payload.books, state);
+      return adapter.addMany(action.payload.books, state);
     }
 
     case BookActionTypes.UPDATE_BOOK: {
-      return bookAdapter.updateOne(action.payload.book, state);
+      return adapter.updateOne(action.payload.book, state);
     }
 
     case BookActionTypes.UPDATE_BOOKS: {
-      return bookAdapter.updateMany(action.payload.books, state);
+      return adapter.updateMany(action.payload.books, state);
     }
 
     case BookActionTypes.DELETE_BOOK: {
-      return bookAdapter.removeOne(action.payload.id, state);
+      return adapter.removeOne(action.payload.id, state);
     }
 
     case BookActionTypes.DELETE_BOOKS: {
-      return bookAdapter.removeMany(action.payload.ids, state);
+      return adapter.removeMany(action.payload.ids, state);
     }
 
     case BookActionTypes.LOAD_BOOKS: {
-      return bookAdapter.addAll(action.payload.books, state);
+      return adapter.addAll(action.payload.books, state);
     }
 
     case BookActionTypes.CLEAR_BOOKS: {
-      return bookAdapter.removeAll({...state, selectedUserId: null});
+      return adapter.removeAll({...state, selectedUserId: null});
+    }
+
+    case BookActionTypes.SEARCH_BOOKS: {
+      return {
+        ...state,
+        searchBook: action.payload
+      };
     }
 
     default: {
@@ -51,6 +61,17 @@ export function bookReducer(state: State = initialState, action: BookActions): S
     }
   }
 }
+
+export const {
+  selectIds: selectBookIds,
+  selectEntities: selectBookEntities,
+  selectAll: selectAllBooks,
+  selectTotal: selectBookTotal
+} = adapter.getSelectors();
+
+export const searchBook = (state: State) => state.searchBook;
+export const selectedBook = (state: State) => state.selectedBook;
+
 
 
 

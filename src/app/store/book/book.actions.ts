@@ -10,7 +10,8 @@ export enum BookActionTypes {
   UPDATE_BOOKS = '[Book] Update Books',
   DELETE_BOOK = '[Book] Delete Book',
   DELETE_BOOKS = '[Book] Delete Books',
-  CLEAR_BOOKS = '[Book] Clear Books'
+  CLEAR_BOOKS = '[Book] Clear Books',
+  SEARCH_BOOKS = '[Book] Search Books'
 }
 
 export class LoadBooks implements Action {
@@ -66,6 +67,13 @@ export class ClearBooks implements Action {
   readonly type = BookActionTypes.CLEAR_BOOKS;
 }
 
+export class SearchBooks implements Action {
+  readonly type = BookActionTypes.SEARCH_BOOKS;
+
+  constructor(public payload: string) {
+  }
+}
+
 export type BookActions =
   LoadBooks
   | AddBook
@@ -74,4 +82,5 @@ export type BookActions =
   | UpdateBooks
   | DeleteBook
   | DeleteBooks
-  | ClearBooks;
+  | ClearBooks
+  | SearchBooks;

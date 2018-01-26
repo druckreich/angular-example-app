@@ -1,6 +1,7 @@
-import {ActionReducer, ActionReducerMap, MetaReducer} from '@ngrx/store';
+import {ActionReducer, ActionReducerMap, createSelector, MetaReducer} from '@ngrx/store';
 import * as fromBook from './book/book.reducer';
 import {environment} from '../../environments/environment';
+import {Book} from './book/book.model';
 
 // ---------------> Logger and Metareducer
 
@@ -29,7 +30,27 @@ export const reducers: ActionReducerMap<State> = {
 // ---------------> Selectors
 
 export const getBookState = (state: State) => state.books;
-export const getBookSelector = fromBook.bookAdapter.getSelectors(getBookState);
+
+
+export const selectAllBooks = createSelector(getBookState, fromBook.selectAllBooks);
+export const selectBookTotal = createSelector(getBookState, fromBook.selectBookTotal);
+
+export const searchBook = createSelector(getBookState, fromBook.searchBook);
+
+export const selectFilteredBooks = createSelector(selectAllBooks, searchBook, (books, filter) => {
+  if (filter) {
+    return books.filter((book: Book) => book.title.toLowerCase().indexOf(filter.toLowerCase()) !== -1);
+  }
+  return books;
+});
+
+
+
+
+
+
+
+
 
 
 
