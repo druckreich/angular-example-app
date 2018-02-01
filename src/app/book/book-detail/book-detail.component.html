@@ -1,2 +1,8 @@
-<h1>WUHUHUHUHU</h1>
-{{book?.title}}
+<div *ngIf="book$ | async; let book">
+  <div class="card">
+    <div class="card-block">
+      <h3 class="card-title">{{book.title}}<small>{{book.author}}</small></h3>
+    </div>
+  </div>
+</div>
+

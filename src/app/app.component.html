@@ -1,1 +1,11 @@
-<router-outlet></router-outlet>
+<div class="grid-container">
+  <div id="navbar">
+    <div class="list-group list-group-flush">
+      <a href="#" class="list-group-item list-group-item-action" [routerLink]="['/books']">Bücher Liste</a>
+    </div>
+  </div>
+  <div id="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
