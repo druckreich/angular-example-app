@@ -1,0 +1,12 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+}
+
+.grid-container #header {
+  grid-column: 2 / 9;
+}
+
+.grid-container #content {
+  grid-column: 2 / 9;
+}
