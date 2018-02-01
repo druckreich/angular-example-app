@@ -1,13 +1,13 @@
-<div class="container">
+<div class="header">
   <div class="page-header">
     <h4>Beispiel einer Buchsuche mit @ngrx/store, @ngrx/effects und @ngrx/entity</h4>
   </div>
-  <div class="form" *ngIf="checkedBooks$ | async; let checkedBooks">
-    <div class="form-group" *ngIf="checkedBooks.length == 0">
+  <div class="form">
+    <div class="form-group" *ngIf="checkedBookIds.length == 0">
       <input class="form-control" (keyup)="handleKeyup($event.target.value)">
     </div>
-    <div class="form-group" *ngIf="checkedBooks.length > 0">
-      <button class="btn btn-default" (click)="handleDeleteButtonClicked(checkedBooks)"><i
+    <div class="form-group" *ngIf="checkedBookIds.length > 0">
+      <button class="btn btn-default" (click)="handleDeleteButtonClicked()"><i
         class="glyphicon glyphicon-trash"></i>
       </button>
     </div>

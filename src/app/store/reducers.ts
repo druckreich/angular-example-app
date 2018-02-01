@@ -44,14 +44,6 @@ export const selectFilteredBooks = createSelector(selectAllBooks, searchBook, (b
   return books;
 });
 
-export const selectCheckedBooks = createSelector(selectAllBooks, (books) => {
-  return books.filter((book: Book) => book.$isChecked === true);
-});
-
-
-export const hasCheckedBooks = createSelector(selectAllBooks, (books) => {
-  return books.find((book: Book) => book.$isChecked === true) != null;
-});
 
 
 

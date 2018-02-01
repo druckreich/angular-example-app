@@ -8,6 +8,4 @@ export interface Book {
   pages: number;
   title: string;
   year: number;
-
-  $isChecked?: boolean;
 }
