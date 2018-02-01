@@ -1,14 +1,18 @@
-import {BrowserModule} from '@angular/platform-browser';
+import {CommonModule} from "@angular/common";
+import {HttpClientModule} from "@angular/common/http";
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {RouterModule, Routes} from '@angular/router';
+import {EffectsModule} from '@ngrx/effects';
 import {StoreModule} from '@ngrx/store';
 import {AppComponent} from './app.component';
-import {metaReducers, reducers} from "./store/reducers";
-import {EffectsModule} from '@ngrx/effects';
-import {BookService} from "./store/book/book.service";
-import {HttpClientModule} from "@angular/common/http";
-import {CommonModule} from "@angular/common";
+import {BookModule} from './book/book.module';
 import {AppEffects} from "./store/effects";
+import {metaReducers, reducers} from "./store/reducers";
 
+export const APP_ROUTES: Routes = [
+  {path: '**', pathMatch: 'full', redirectTo: 'books'}
+];
 
 @NgModule({
   declarations: [
@@ -18,15 +22,16 @@ import {AppEffects} from "./store/effects";
     CommonModule,
     BrowserModule,
     HttpClientModule,
+    RouterModule.forRoot(APP_ROUTES),
     StoreModule.forRoot(reducers, {metaReducers}),
     EffectsModule.forRoot([
       AppEffects
-    ])
+    ]),
+
+    BookModule
 
   ],
-  providers: [
-    BookService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

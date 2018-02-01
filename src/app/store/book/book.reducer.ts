@@ -1,10 +1,10 @@
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
-import {Book} from './book.model';
 import {BookActions, BookActionTypes} from './book.actions';
+import {Book} from './book.model';
 
 
 export interface State extends EntityState<Book> {
-  selectedBook: Book;
+  selectedBook: number;
   searchBook: string;
 }
 
@@ -53,6 +53,13 @@ export function bookReducer(state: State = initialState, action: BookActions): S
       return {
         ...state,
         searchBook: action.payload
+      };
+    }
+
+    case BookActionTypes.SELECT_BOOK: {
+      return {
+        ...state,
+        selectedBook: action.payload
       };
     }
 

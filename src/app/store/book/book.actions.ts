@@ -1,6 +1,6 @@
-import {Book} from './book.model';
-import {Action} from '@ngrx/store';
 import {Update} from '@ngrx/entity';
+import {Action} from '@ngrx/store';
+import {Book} from './book.model';
 
 export enum BookActionTypes {
   LOAD_BOOKS = '[Book] Load Books',
@@ -12,6 +12,7 @@ export enum BookActionTypes {
   DELETE_BOOKS = '[Book] Delete Books',
   CLEAR_BOOKS = '[Book] Clear Books',
   SEARCH_BOOKS = '[Book] Search Books',
+  SELECT_BOOK = '[Book] Select Book'
 }
 
 export class LoadBooks implements Action {
@@ -74,6 +75,13 @@ export class SearchBook implements Action {
   }
 }
 
+export class SelectBook implements Action {
+  readonly type = BookActionTypes.SELECT_BOOK;
+
+  constructor(public payload: number) {
+  }
+}
+
 export type BookActions =
   LoadBooks
   | AddBook
@@ -83,5 +91,6 @@ export type BookActions =
   | DeleteBook
   | DeleteBooks
   | ClearBooks
-  | SearchBook;
+  | SearchBook
+  | SelectBook;
 

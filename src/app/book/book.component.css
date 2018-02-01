@@ -1,0 +1,13 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+}
+
+.grid-container #list {
+  grid-column: 2 / 5;
+}
+
+.grid-container #details {
+  grid-column: 5 / -1;
+}
+
