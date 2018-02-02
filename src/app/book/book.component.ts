@@ -19,7 +19,7 @@ export class BookComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(new InitModule());
+    //this.store.dispatch(new InitModule());
   }
 
   handleShowDetails(book: Book) {

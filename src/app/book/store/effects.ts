@@ -1,22 +1,29 @@
 import {Injectable} from '@angular/core';
-import {Actions, Effect} from '@ngrx/effects';
-import {RootActionTypes} from './actions';
-import {LoadBooks} from './book/book.actions';
-import {Book} from './book/book.model';
+import {Actions, Effect, ofType} from '@ngrx/effects';
+import {Action} from '@ngrx/store';
+import {Observable} from 'rxjs/Observable';
+import {mergeMap} from 'rxjs/operators';
+import {LoadBooks, BookActionTypes, SearchBook} from './book/book.actions';
 import {BookService} from './book/book.service';
 
+
 @Injectable()
-export class AppEffects {
-  @Effect()
-  initApp$ = this.actions$.ofType(RootActionTypes.INIT_MODULE)
-    .mergeMap(action => {
-        return this.bookService.get().map((books: Book[]) => {
-          return new LoadBooks({books: books});
-        });
-      }
-    );
+export class BookEffects {
+
 
   constructor(private actions$: Actions, private bookService: BookService) {
 
   }
+
+  @Effect()
+  searchBooks$: Observable<Action> = this.actions$.pipe(
+    ofType(BookActionTypes.SEARCH_BOOKS),
+    mergeMap((action: SearchBook) => {
+      return this.bookService.search(action.payload)
+        .map((result: any) => {
+          const books: any = result.docs;
+          return new LoadBooks({books: books});
+        });
+    })
+  );
 }

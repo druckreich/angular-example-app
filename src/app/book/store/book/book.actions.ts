@@ -66,6 +66,7 @@ export class DeleteBooks implements Action {
 
 export class ClearBooks implements Action {
   readonly type = BookActionTypes.CLEAR_BOOKS;
+
 }
 
 export class SearchBook implements Action {

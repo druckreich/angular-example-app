@@ -4,15 +4,19 @@ import {Book} from './book.model';
 
 
 export interface State extends EntityState<Book> {
-  selectedBook: number;
-  searchBook: string;
+  q: string;
 }
 
-export const adapter: EntityAdapter<Book> = createEntityAdapter<Book>();
+export const adapter: EntityAdapter<Book> = createEntityAdapter<Book>({
+  selectId: (b: Book) => {
+    if (b.hasOwnProperty('isbn')) {
+      return b['key'];
+    }
+  }
+});
 
 const initialState: State = adapter.getInitialState({
-  selectedBook: null,
-  searchBook: ''
+  q: ''
 });
 
 export function bookReducer(state: State = initialState, action: BookActions): State {
@@ -52,14 +56,7 @@ export function bookReducer(state: State = initialState, action: BookActions): S
     case BookActionTypes.SEARCH_BOOKS: {
       return {
         ...state,
-        searchBook: action.payload
-      };
-    }
-
-    case BookActionTypes.SELECT_BOOK: {
-      return {
-        ...state,
-        selectedBook: action.payload
+        q: action.payload
       };
     }
 
@@ -76,8 +73,7 @@ export const {
   selectTotal: selectBookTotal
 } = adapter.getSelectors();
 
-export const searchBook = (state: State) => state.searchBook;
-export const selectedBook = (state: State) => state.selectedBook;
+export const searchBook = (state: State) => state.q;
 
 
 

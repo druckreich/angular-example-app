@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Book} from '../store/book/book.model';
-import * as BookActionTypes from './../store/book/book.actions';
 
 @Component({
   selector: 'app-book-detail',
@@ -26,7 +25,7 @@ export class BookDetailComponent implements OnInit {
   }
 
   handleSave(): void {
-    this.store.dispatch(new BookActionTypes.UpdateBook({book: {id: this.book.id, changes: this.formValue}}));
+    this.bsModalRef.hide();
   }
 
 }

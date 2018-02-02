@@ -1,20 +1,19 @@
-import {HttpClient} from "@angular/common/http";
-import {Injectable} from "@angular/core";
-import {Observable} from "rxjs/Observable";
-import {books} from "../book-list";
-import {Book} from "./book.model";
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class BookService {
-  constructor(http: HttpClient) {
+
+  readonly baseUrl: string = 'http://openlibrary.org/search.json';
+
+  constructor(private http: HttpClient) {
 
   }
 
-  public get(): Observable<Book[]> {
-    return Observable.of(books);
-  }
-
-  public getById(id: number = null): Observable<Book> {
-    return Observable.of(books.find((book: Book) => book.id === id));
+  public search(search: string): Observable<any> {
+    const params: HttpParams = new HttpParams()
+      .set('q', search);
+    return this.http.get(this.baseUrl, {params: params});
   }
 }

@@ -7,8 +7,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {StoreModule} from '@ngrx/store';
 import {AppComponent} from './app.component';
 import {BookModule} from './book/book.module';
-import {AppEffects} from "./book/store/effects";
-import {metaReducers, reducers} from "./book/store/reducers";
+import {metaReducers, reducers} from './store/reducers';
 
 export const APP_ROUTES: Routes = [
   {path: '**', pathMatch: 'full', redirectTo: 'books'}
@@ -24,10 +23,7 @@ export const APP_ROUTES: Routes = [
     HttpClientModule,
     RouterModule.forRoot(APP_ROUTES),
     StoreModule.forRoot(reducers, {metaReducers}),
-    EffectsModule.forRoot([
-      AppEffects
-    ]),
-
+    EffectsModule.forRoot([]),
     BookModule
 
   ],
