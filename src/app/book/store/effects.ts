@@ -1,14 +1,14 @@
-import {Actions, Effect} from '@ngrx/effects';
-import {AppActionTypes} from '../app.actions';
 import {Injectable} from '@angular/core';
-import {BookService} from './book/book.service';
-import {Book} from './book/book.model';
+import {Actions, Effect} from '@ngrx/effects';
+import {RootActionTypes} from './actions';
 import {LoadBooks} from './book/book.actions';
+import {Book} from './book/book.model';
+import {BookService} from './book/book.service';
 
 @Injectable()
 export class AppEffects {
   @Effect()
-  initApp$ = this.actions$.ofType(AppActionTypes.INIT_APP)
+  initApp$ = this.actions$.ofType(RootActionTypes.INIT_MODULE)
     .mergeMap(action => {
         return this.bookService.get().map((books: Book[]) => {
           return new LoadBooks({books: books});

@@ -1,6 +1,4 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {InitApp} from './app.actions';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +9,11 @@ import {InitApp} from './app.actions';
 export class AppComponent implements OnInit {
 
 
-  constructor(private store: Store<any>) {
+  constructor() {
 
   }
 
   ngOnInit() {
-    this.store.dispatch(new InitApp());
   }
 
 

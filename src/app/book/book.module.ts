@@ -1,25 +1,24 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
-import {BookService} from '../store/book/book.service';
+import {ModalModule} from 'ngx-bootstrap/modal';
 import {BookDetailComponent} from './book-detail/book-detail.component';
+import {BookFormComponent} from './book-detail/book-form/book-form.component';
 import {BookListComponent} from './book-list/book-list.component';
 import {BookComponent} from './book.component';
+import {BookService} from './store/book/book.service';
 
 export const BOOK_ROUTES: Routes = [
-  {
-    path: 'books',
-    component: BookComponent,
-    children: [
-      {path: ':id', component: BookDetailComponent, outlet: 'book-details'}
-    ]
-  }
+  {path: 'books', component: BookComponent}
 ];
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(BOOK_ROUTES)
+    FormsModule,
+    RouterModule.forChild(BOOK_ROUTES),
+    ModalModule.forRoot()
   ],
   providers: [
     BookService
@@ -28,10 +27,15 @@ export const BOOK_ROUTES: Routes = [
     BookComponent,
     BookListComponent,
     BookDetailComponent,
+    BookFormComponent
   ],
   exports: [
     BookComponent
+  ],
+  entryComponents: [
+    BookDetailComponent
   ]
 })
+
 export class BookModule {
 }

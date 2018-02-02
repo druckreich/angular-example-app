@@ -1,6 +1,6 @@
 import {ActionReducer, ActionReducerMap, createSelector, MetaReducer} from '@ngrx/store';
 import * as fromBook from './book/book.reducer';
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
 import {Book} from './book/book.model';
 
 // ---------------> Logger and Metareducer

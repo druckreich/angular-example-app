@@ -7,8 +7,8 @@ import {EffectsModule} from '@ngrx/effects';
 import {StoreModule} from '@ngrx/store';
 import {AppComponent} from './app.component';
 import {BookModule} from './book/book.module';
-import {AppEffects} from "./store/effects";
-import {metaReducers, reducers} from "./store/reducers";
+import {AppEffects} from "./book/store/effects";
+import {metaReducers, reducers} from "./book/store/reducers";
 
 export const APP_ROUTES: Routes = [
   {path: '**', pathMatch: 'full', redirectTo: 'books'}

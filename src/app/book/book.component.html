@@ -1,9 +1,6 @@
 <div class="grid-container">
   <div id="list">
-    <app-book-list></app-book-list>
-  </div>
-  <div id="details">
-    <router-outlet name="book-details"></router-outlet>
+    <app-book-list (showDetails)="handleShowDetails($event)"></app-book-list>
   </div>
 </div>
 

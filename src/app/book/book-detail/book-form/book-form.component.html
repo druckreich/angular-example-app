@@ -1,0 +1,32 @@
+<form #form="ngForm">
+  <div class="form-group">
+    <label>Titel</label>
+    <input name="title" [ngModel]="book.title" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label>Author</label>
+    <input name="author" [ngModel]="book.author" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label>Sprache</label>
+    <input name="language" [ngModel]="book.language" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label>Link</label>
+    <input name="link" [ngModel]="book.link" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label>Seiten</label>
+    <input name="pages" [ngModel]="book.pages" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label>Jahr</label>
+    <input name="year" [ngModel]="book.year" class="form-control">
+  </div>
+</form>
+
