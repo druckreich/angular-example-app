@@ -9,14 +9,9 @@
   </div>
 </div>
 
-<div id="content">
-  <div *ngIf="books$ | async; let books">
-    <span class="text-muted"><small>Gefundene Bücher: {{books.length}} von {{bookTotal$ | async}}</small></span>
-    <div class="list-group list-group-flush">
-      <div class="list-group-item list-group-item-action" *ngFor="let book of books">
-        <b>{{book.title}}</b>
-      </div>
-    </div>
-  </div>
+<span class="text-muted"><small>Gefundene Bücher: {{bookTotal$ | async}}</small></span>
+
+<div class="book-grid-container">
+  <app-book-list-item class="book-grid-card" [book]="book" *ngFor="let book of books$ | async"></app-book-list-item>
 </div>
 

@@ -13,7 +13,7 @@ export class BookService {
 
   public search(search: string): Observable<any> {
     const params: HttpParams = new HttpParams()
-      .set('q', search);
+      .set('title', search);
     return this.http.get(this.baseUrl, {params: params});
   }
 }

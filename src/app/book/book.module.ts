@@ -13,6 +13,7 @@ import {BookComponent} from './book.component';
 import {BookService} from './store/book/book.service';
 import {BookEffects} from './store/effects';
 import {reducers} from './store/reducers';
+import { BookListItemComponent } from './book-list/book-list-item/book-list-item.component';
 
 export const BOOK_ROUTES: Routes = [
   {path: 'books', component: BookComponent}
@@ -38,7 +39,8 @@ export const BOOK_ROUTES: Routes = [
     BookComponent,
     BookListComponent,
     BookDetailComponent,
-    BookFormComponent
+    BookFormComponent,
+    BookListItemComponent
   ],
   exports: [
     BookComponent

@@ -17,7 +17,7 @@ export class BookListComponent implements OnInit {
   showDetails: EventEmitter<Book> = new EventEmitter();
 
   books$: Observable<Book[]> = this.store.select(selectAllBooks);
-  // bookTotal$: Observable<number> = this.store.select(fromRoot.selectBookTotal);
+  bookTotal$: Observable<number> = this.store.select(fromRoot.selectBookTotal);
 
   constructor(private store: Store<any>) {
   }
@@ -28,23 +28,4 @@ export class BookListComponent implements OnInit {
   handleKeyupEnter(filter: string): void {
     this.store.dispatch(new BookActions.SearchBook(filter));
   }
-
-  // handleDeleteButtonClicked(): void {
-  //   this.store.dispatch(new BookActions.DeleteBooks({ids: this.checkedBookIds}));
-  //   this.checkedBookIds = [];
-  // }
-  //
-  // handleCheckBookChange(book: Book): void {
-  //   const index: number = this.checkedBookIds.indexOf(book.id);
-  //   if (index === -1) {
-  //     this.checkedBookIds = [...this.checkedBookIds, book.id];
-  //   } else {
-  //     this.checkedBookIds = [...this.checkedBookIds.slice(0, index), ...this.checkedBookIds.slice(index + 1)];
-  //   }
-  // }
-  //
-  // handleListGroupItemClick(book: Book): void {
-  //   this.showDetails.emit(book);
-  // }
-
 }
