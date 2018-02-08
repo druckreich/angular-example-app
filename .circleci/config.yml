@@ -9,6 +9,9 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
       - run:
+          name: 'ng version'
+          command: 'ng --version'
+      - run:
           name: install-dependencies
           command: yarn install
       - save_cache:
