@@ -15,7 +15,9 @@ jobs:
           command: 'sudo npm install -g npm@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
-      - run: yarn install
+      - run:
+          name: 'install dependencies'
+          command: 'npm install'
       - save_cache:
           key: v1-dependencies-{{ checksum "package.json" }}
           paths:
