@@ -13,9 +13,6 @@ import {selectAllBooks} from '../store/reducers';
 })
 export class BookListComponent implements OnInit {
 
-  @Output()
-  showDetails: EventEmitter<Book> = new EventEmitter();
-
   books$: Observable<Book[]> = this.store.select(selectAllBooks);
   bookTotal$: Observable<number> = this.store.select(fromRoot.selectBookTotal);
 

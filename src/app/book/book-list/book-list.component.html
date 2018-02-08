@@ -2,10 +2,8 @@
   <div class="page-header">
     <h4>Beispiel einer Buchsuche mit @ngrx/store, @ngrx/effects und @ngrx/entity</h4>
   </div>
-  <div class="form">
-    <div class="form-group">
-      <input class="form-control" (keyup.enter)="handleKeyupEnter(q.value)" #q>
-    </div>
+  <div class="md-form">
+    <input mdbActive type="text" class="form-control" (keyup.enter)="handleKeyupEnter(q.value)" #q>
   </div>
 </div>
 

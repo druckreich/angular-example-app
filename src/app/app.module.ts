@@ -5,6 +5,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule, Routes} from '@angular/router';
 import {EffectsModule} from '@ngrx/effects';
 import {StoreModule} from '@ngrx/store';
+import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {AppComponent} from './app.component';
 import {BookModule} from './book/book.module';
 import {metaReducers, reducers} from './store/reducers';
@@ -21,6 +22,7 @@ export const APP_ROUTES: Routes = [
     CommonModule,
     BrowserModule,
     HttpClientModule,
+    MDBBootstrapModule.forRoot(),
     RouterModule.forRoot(APP_ROUTES),
     StoreModule.forRoot(reducers, {metaReducers}),
     EffectsModule.forRoot([]),
