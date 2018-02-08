@@ -1,30 +1,27 @@
 version: 2
+
 jobs:
-  build:
-    working_directory: ~/app-name
-    docker:
-      - image: circleci/node:6-browsers
-    steps:
-      - checkout
-      - restore_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
-      - run:
-          name: 'ng version'
-          command: yarn ng --version
-      - run:
-          name: install-dependencies
-          command: yarn install
-      - save_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-            - ./node_modules
-      - run:
-          name: angular-build
-          command: yarn ng build --prod --no-progress
-      - run:
-          name: angular-test
-          command: yarn test --single-run --no-progress
-      - run:
-          name: angular-lint
-          command: yarn lint
+    build:
+        working_directory: ~/angularcli
+        # The primary container is an instance of the first list image listed. Your build commands run in this container.
+        docker:
+            - image: circleci/node:6-browsers
+              environment:
+                  CHROME_BIN: "/usr/bin/google-chrome"
+        steps:
+            - checkout
+            - run:
+                name: Install node_modules with npm
+                command: npm install
+            - save_cache:
+                key: dependency-cache-{{ checksum "package.json" }}
+                paths:
+                    - ./node_modules
+            - run:
+                name: Install angularcli
+                command: sudo npm install -g @angular/cli@latest
+            - run:
+                name: Run unit tests with karma
+                command: ng build --prod
+            - store_test_results:
+                path: test-results.xml
