@@ -14,8 +14,8 @@ jobs:
           name: "update npm"
           command: 'sudo npm install -g npm@latest'
       - run:
-          name: "npm i process-nextick-args util-deprecate"
-          command: "npm i process-nextick-args util-deprecate"
+          name: "sudo npm install -g process-nextick-args util-deprecate"
+          command: "sudo npm install -g process-nextick-args util-deprecate"
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
