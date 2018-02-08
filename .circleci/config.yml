@@ -10,7 +10,7 @@ jobs:
           key: dependency-cache-{{ checksum "yarn.lock" }}
       - run:
           name: 'ng version'
-          command: yarn version
+          command: yarn ng --version
       - run:
           name: install-dependencies
           command: yarn install
