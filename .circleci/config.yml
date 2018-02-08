@@ -1,27 +1,27 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
 version: 2
 jobs:
   build:
-    working_directory: ~/repo
+    working_directory: ~/app-name
     docker:
-      - image: circleci/node:7.6
+      - image: circleci/node:6-browsers
     steps:
       - checkout
-      - run:
-          name: "update npm"
-          command: 'sudo npm install -g npm@latest'
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "yarn.lock" }}
       - run:
-          name: 'npm install'
-          command: 'npm install'
+          name: install-dependencies
+          command: yarn install
       - save_cache:
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "yarn.lock" }}
           paths:
-            - node_modules
+            - ~/.cache/yarn
+            - ./node_modules
       - run:
-          name: "run build --prod"
-          command: './node_modules/.bin/ng build --prod'
+          name: angular-build
+          command: yarn ng -- build --prod --aot --no-progress
+      - run:
+          name: angular-test
+          command: yarn test -- --single-run --no-progress
+      - run:
+          name: angular-lint
+          command: yarn lint
