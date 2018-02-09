@@ -28,6 +28,7 @@ jobs:
 #          key: dependency-cache-{{ checksum "package-lock.json" }}
 #          paths:
 #            - ~/app-name/node_modules/
+      - run: npm install
       - run:
           name: angular-build
           command: ~/app-name/node_modules/.bin/ng build --prod --no-progress
