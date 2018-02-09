@@ -15,9 +15,9 @@ jobs:
           command: |
             node --version
             npm --version
-      - run:
-          name: update npm & @angular/cli
-          command: sudo npm install -g npm@5.6.0 @angular/cli@1.6.8 --no-progress --quiet --loglevel warn
+#      - run:
+#          name: update npm & @angular/cli
+#          command: sudo npm install -g npm@5.6.0 @angular/cli@1.6.8 --no-progress --quiet --loglevel warn
       - run:
           name: check versions after update
           command: |
