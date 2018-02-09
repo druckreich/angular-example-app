@@ -14,7 +14,7 @@ jobs:
             - dependency-cache-{{ checksum "package.json" }}
             - dependency-cache-
       - run:
-          name: check versions before update
+          name: check versions for node and npm
           command: |
             node --version
             npm --version
@@ -22,10 +22,11 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ~/app-name/node_modules/
-      - run: npm install
       - run:
-          name: angular-build
-          command: npm run ng build
+        name: install dependencies and build project
+        command: |
+          npm install
+          npm run ng build
   deploy:
     <<: *defaults
     steps:
@@ -43,7 +44,8 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build
-      - deploy:
-          requires:
-            - build
+      - deploy
+#      - build
+#      - deploy:
+#          requires:
+#            - build
