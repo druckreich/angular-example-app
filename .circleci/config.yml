@@ -1,5 +1,5 @@
 defaults: &defaults
-  working_directory: ~/app-name
+  working_directory: ~/APP
   docker:
     - image: circleci/node:9.5.0
 
