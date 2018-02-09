@@ -7,21 +7,18 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
+          key: dependency-cache-{{ checksum "package.lock" }}
+      - run: npm install
       - run:
-          name: install-dependencies
-          command: yarn install
+          name: check versions
+          command:
+            npm --version
+            node --version
+            ng --version
       - save_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
+          key: dependency-cache-{{ checksum "package.lock" }}
           paths:
-            - ~/.cache/yarn
             - ./node_modules
       - run:
           name: angular-build
-          command: yarn ng -- build --prod --aot --no-progress
-      - run:
-          name: angular-test
-          command: yarn test -- --single-run --no-progress
-      - run:
-          name: angular-lint
-          command: yarn lint
+          command: npm ng build --prod --verbose
