@@ -15,15 +15,6 @@ jobs:
           command: |
             node --version
             npm --version
-#      - run:
-#          name: update npm & @angular/cli
-#          command: sudo npm install -g npm@5.6.0 @angular/cli@1.6.8 --no-progress --quiet --loglevel warn
-#      - run:
-#          name: check versions after update
-#          command: |
-#            node --version
-#            npm --version
-#            ng --version
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
@@ -32,3 +23,31 @@ jobs:
       - run:
           name: angular-build
           command: npm run ng build
+
+  deploy:
+    machine:
+      services:
+        - docker
+        dependencies:
+          override:
+            - docker info
+            - docker build --rm=false -t druckreich/angular-example-app .
+
+        test:
+          override:
+            - docker run -d -p 9200:9200 druckreich/angular-example-app; sleep 10
+            - curl --retry 10 --retry-delay 5 -v http://localhost:9200
+
+        deployment:
+          hub:
+            branch: master
+            commands:
+              - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+              - docker push druckreich/angular-example-app
+
+  workflows:
+    version: 2
+    build-and-deploy:
+        jobs:
+          - build
+          - deploy
