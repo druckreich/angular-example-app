@@ -18,8 +18,8 @@ jobs:
       - run:
           name: update npm & @angular/cli
           command: |
-            sudo npm install -g npm@5.6.0 --silent
-            sudo npm install -g @angular/cli@1.6.8 --silend
+            sudo npm install -g npm@5.6.0 --no-progress
+            sudo npm install -g @angular/cli@1.6.8 --no-progress
       - run:
           name: check versions after update
           command: |
