@@ -1,3 +1,4 @@
+version: 2
 jobs:
   build:
     working_directory: ~/app-name
@@ -22,7 +23,6 @@ jobs:
       - run:
           name: angular-build
           command: npm run ng build
-
   deploy:
     working_directory: ~/app-name
       docker:
