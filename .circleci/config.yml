@@ -23,10 +23,11 @@ jobs:
           paths:
             - ~/app-name/node_modules/
       - run:
-          name: install dependencies and build project
-          command: |
-            npm install
-            npm run ng build
+          name: install dependencies
+          command: npm install
+      - run:
+          name: build project
+          command: npm run build
   deploy:
     <<: *defaults
     steps:
@@ -35,7 +36,7 @@ jobs:
           name: deploy to docker
           command: |
             TAG=0.1.$CIRCLE_BUILD_NUM
-            docker build -t druckreich/angular-example-app:$TAG -f ./Dockerfile .
+            docker build -t druckreich/angular-example-app:$TAG .
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker push druckreich/angular-example-app:$TAG
 
@@ -44,7 +45,8 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build
-      - deploy:
-          requires:
-            - build
+      - deploy
+#      - build
+#      - deploy:
+#          requires:
+#            - build
