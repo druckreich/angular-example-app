@@ -7,16 +7,16 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.lock" }}
+          key: dependency-cache-{{ checksum "package-lock.json" }}
       - run: npm install
       - run:
           name: check versions
           command:
-            npm --version
-            node --version
-            ng --version
+            - npm --version
+            - node --version
+            - ng --version
       - save_cache:
-          key: dependency-cache-{{ checksum "package.lock" }}
+          key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
       - run:
