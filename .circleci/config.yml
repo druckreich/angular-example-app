@@ -1,9 +1,11 @@
+defaults: &defaults
+  working_directory: /app-name
+  docker:
+    - image: buildpack-deps:jessie
+
 version: 2
 jobs:
   build:
-    working_directory: ~/app-name
-    docker:
-      - image: circleci/node:9.5.0
     steps:
       - checkout
       - restore_cache:
@@ -24,9 +26,6 @@ jobs:
           name: angular-build
           command: npm run ng build
   deploy:
-    working_directory: ~/app-name
-    docker:
-      - image: circleci/node:9.5.0
     steps:
       - run:
           name: deploy to docker
