@@ -11,16 +11,16 @@ jobs:
             - dependency-cache-{{ checksum "package-lock.json" }}
             - dependency-cache-
       - run:
-          name: update npm & @angular/cli
-          command: |
-            sudo npm install -g npm@5.6.0
-            sudo npm install -g @angular/cli@1.6.8
-      - run:
           name: check versions
           command: |
             node --version
             npm --version
             ng --version
+      - run:
+          name: update npm & @angular/cli
+          command: |
+            sudo npm install -g npm@5.6.0 --silent
+            sudo npm install -g @angular/cli@1.6.8 --silend
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
