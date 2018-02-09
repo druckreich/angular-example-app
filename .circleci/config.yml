@@ -6,10 +6,10 @@ jobs:
       - image: circleci/node:9.5.0
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - dependency-cache-{{ checksum "package-lock.json" }}
-            - dependency-cache-
+#      - restore_cache:
+#          keys:
+#            - dependency-cache-{{ checksum "package-lock.json" }}
+#            - dependency-cache-
       - run:
           name: check versions before update
           command: |
@@ -24,10 +24,10 @@ jobs:
 #            node --version
 #            npm --version
 #            ng --version
-      - save_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
-          paths:
-            -
+#      - save_cache:
+#          key: dependency-cache-{{ checksum "package-lock.json" }}
+#          paths:
+#            - ~/app-name/node_modules/
       - run:
           name: angular-build
-          command: ~/app-name/node_modules/.bin/ng build --prod --loglevel warn
+          command: ~/app-name/node_modules/.bin/ng build --prod --no-progress
