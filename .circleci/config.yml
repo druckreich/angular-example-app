@@ -35,7 +35,7 @@ jobs:
           name: deploy to docker
           command: |
             TAG=0.1.$CIRCLE_BUILD_NUM
-            docker build -t druckreich/angular-example-app:$TAG
+            docker build -t druckreich/angular-example-app:$TAG .
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker push druckreich/angular-example-app:$TAG
 
