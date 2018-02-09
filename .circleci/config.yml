@@ -6,6 +6,7 @@ defaults: &defaults
 version: 2
 jobs:
   build:
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
@@ -26,6 +27,7 @@ jobs:
           name: angular-build
           command: npm run ng build
   deploy:
+    <<: *defaults
     steps:
       - run:
           name: deploy to docker
