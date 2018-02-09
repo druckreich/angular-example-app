@@ -30,4 +30,4 @@ jobs:
             - ~/app-name/node_modules
       - run:
           name: angular-build
-          command: npm ng build --prod --loglevel warn
+          command: ng build --prod --loglevel warn
