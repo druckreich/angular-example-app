@@ -27,7 +27,7 @@ jobs:
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
-            - ~/app-name/node_modules
+            -
       - run:
           name: angular-build
-          command: ng build --prod --loglevel warn
+          command: ~/app-name/node_modules/.bin/ng build --prod --loglevel warn
