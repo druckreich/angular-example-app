@@ -1,5 +1,5 @@
 defaults: &defaults
-  working_directory: /app-name
+  working_directory: ~/app-name
   docker:
     - image: circleci/node:9.5.0
 
@@ -31,7 +31,7 @@ jobs:
     steps:
       - run:
           name: deploy to docker
-          commands: |
+          command: |
             - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
             - docker push druckreich/angular-example-app
 workflows:
