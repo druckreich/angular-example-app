@@ -1,18 +1,14 @@
 FROM node:9.5.0
-WORKDIR /APP
 
-# prepare a user which runs everything locally! - required in child images!
-# RUN useradd --user-group --create-home --shell /bin/false app
+COPY package.json package-lock.json ./
 
-RUN apt-get update -qqy \
-    && apt-get -qqy install vim
+RUN npm set progress=false && npm config set depth 0 && npm cache clean --force
 
-COPY package.json /game-app
-RUN npm install -g @angular/cli
-RUN npm install
+RUN npm i && mkdir /ng-app && cp -R ./node_modules ./ng-app
 
-COPY . /game-app
+WORKDIR /ng-app
 
-RUN npm install -g @angular/cli@1.6.8 && npm cache clean
+COPY . .
 
-EXPOSE 80
+RUN $(npm bin)/ng build --prod --build-optimizer
+
